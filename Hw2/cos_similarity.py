@@ -7,28 +7,22 @@ content = pd.read_excel('hw1_text.xlsx',"foxconn")[u'內容'].tolist()
 
 df_dict = dict()  #這是一個dictionary
 
-def find_grams(article, gram, output_list):
+def find_grams(article, output_list):
 	"""
-	用來找出所有 n_gram ，用dictionary，且輸出一個長度為245的list(此為稀疏向量)
+	輸出一個長度為245的list(此為稀疏向量)
 	"""
 	
-	dict1 = dict()
-	for i in range( 0, len(article)- gram ):
-		word =  article[i:i+gram]
-		if word in keylist:
-			if word not in dict1:
-				dict1[word] = 1
-				try:
-					df_dict[word] += 1
-				except:
-					df_dict[word] = 1
-			else:
-				dict1[word] += 1
 
-	for key in dict1.keys():
+	for i in range(len(keylist)):
+		output_list[i] = article.count( keylist[i] )
+	for i in range(len(output_list)):
+		if output_list[i] >0:
+			try:
+				df_dict[keylist[i]] += 1
+			except:
+				df_dict[keylist[i]] = 1
 
-		index = keylist.index(key)
-		output_list[index] = dict1[key]
+
 
 		
 # Point object define
@@ -85,8 +79,8 @@ for article in content:
     id +=1
     print(id)
     output_list = [0]*245
-    for n in range(2,7):
-        find_grams(article, n, output_list)
+
+    find_grams(article, output_list)
     Points_list.append(    Point(output_list, id)   )	
 
 Total_number_of_documents = id
