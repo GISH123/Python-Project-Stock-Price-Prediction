@@ -14,11 +14,12 @@
 '''
 
 # file_in = r'C:\Users\User\Desktop\大數據與商業分析\mid tern\news.csv'
-file_in = r'C:\Users\User\news_ready.csv'
-
+direction = r'C:\Users\User\Documents\GitHub\Big_data_analytics\mid project\data\news cluster'
+file_name = 'news_cluster0'
+file_in = direction + '\\' +  file_name +'.csv'
 
 #存檔的目標"資料夾"地址:	e.g r'‪C:\Users\User\Desktop'
-file_out = r'C:\Users\User'
+file_out = r'C:\Users\User\Documents\GitHub\Big_data_analytics\mid project\data\labeled'
 
 import tkinter as tk
 from tkinter import ttk
@@ -166,6 +167,7 @@ class PageOne(tk.Frame):
 		#自動存檔功能
 		if len(label_dict) % 10 == 0 or len(label_dict) == self.target_length:
 			self.save_file()
+			
 		if self.count  < self.target_length - 1:	
 			self.update_frame()
 		elif len(label_dict) == self.target_length:
@@ -176,7 +178,7 @@ class PageOne(tk.Frame):
 		當按下離開之後，將會存檔，存成csv檔案
 		'''
 		global label_dict, ids, start, end
-		write_f = open( file_out + r'\labeled_%i_%i.csv' %(start, end),  'w', newline='')
+		write_f = open( file_out + '\\' + file_name + '_labeled_%i_%i.csv' %(start, end),  'w', newline='')
 		csv_writer = csv.writer(write_f)
 		csv_writer.writerow(['id','label'])
 		for id in ids:
