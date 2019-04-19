@@ -1,10 +1,10 @@
-news_data = r'C:\Users\User\news_ready.csv'
-keys_file = r'C:\Users\User\1000_keywords.txt'
+corpus_file = r'C:\Users\User\forum_ready.csv'
+keys_file = r'C:\Users\User\Documents\GitHub\Big_data_analytics\mid project\data\forum cluster\1000_keywords.txt'
 	
 
 
 keylist = []
-with open( keys_file, 'r', encoding = 'utf-8') as file:
+with open( keys_file, 'r') as file:
     for data in file.readlines():
         data = data.strip()
         keylist.append(data)
@@ -12,7 +12,7 @@ with open( keys_file, 'r', encoding = 'utf-8') as file:
 import pandas as pd
 
 print('Loading data')
-df = pd.read_csv(news_data, encoding = 'big5')
+df = pd.read_csv(corpus_file, encoding = 'utf-8')
 content = df['content'].tolist()
 ids = df['id'].tolist()
 del df
@@ -29,7 +29,10 @@ def find_grams(article, output_list):
 		if keylist[i][0] not in 'abcdefghijklmnopqrstuvwxyz':
 			output_list[i] = article.count( keylist[i] )
 		else:
-			output_list[i] = article.count( keylist[i].upper() )
+			small_number = article.count( keylist[i] )
+			
+			output_list[i] = article.count( keylist[i].upper() ) + small_number
+			
 	for i in range(len(output_list)):
 		if output_list[i] >0:
 			try:
@@ -46,8 +49,8 @@ class Point :
 	def __init__(self, alist):	#此alist代表1個點的座標，比如說x,y,z平面的 (-1,0,2) 這個點就是 Point( [-1, 0, 2] )
 		self.list = alist
 
-		
-		self.get_adjusted_list()
+		if self.list.count(0) != 1000:
+			self.get_adjusted_list()
 
 		
 	def get_adjusted_list(self):
@@ -68,15 +71,17 @@ class Point :
 
 		
 	def get_idf_weighted_list(self, dictionary, total_number):
-		alist = self.list
-		for i in range(len(alist)):
-			if alist[i]!= 0 :
-				df = dictionary[keylist[i]]
-				alist[i] *= log10(total_number/df)
-		del self.list 
+		if self.list.count(0) != 1000:
+			alist = self.list
+			for i in range(len(alist)):
+				if alist[i]!= 0 :
+					df = dictionary[keylist[i]]
+					alist[i] *= log10(total_number/df)
+			del self.list 
 
-		return alist
-
+			return alist
+		else:
+			return self.list
 		
 Points_list = []		
 id = 0
@@ -95,7 +100,7 @@ del id, output_list
 print('Processing idf_weighted_list')
 
 import csv #寫入檔案
-file1 = 	open(r'C:\Users\User\1000_keywords_tf_idf.csv' , 'w',newline='', encoding = 'utf-8')
+file1 = 	open(r'C:\Users\User\forum_1000_tf_idf.csv' , 'w',newline='', encoding = 'utf-8')
 csv_writer = csv.writer(file1)
 csv_writer.writerow(['id']+keylist)
 
