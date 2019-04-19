@@ -3,8 +3,8 @@
 
 必須要更改兩個地方才能使用此程式
 
-1.讀檔的地方
-2.儲存檔案的地方
+1.讀檔的地方 : file_name, direction
+2.儲存檔案的地方 : file_out
 
 讀檔的檔案地址: 如果有下載我清洗過的檔案請輸入 news_ready.csv，否則輸入老師給的 news.csv
 
@@ -13,9 +13,9 @@
 也請注意編碼問題，我的檔案編碼為big5
 '''
 
-# file_in = r'C:\Users\User\Desktop\大數據與商業分析\mid tern\news.csv'
-direction = r'C:\Users\User\Documents\GitHub\Big_data_analytics\mid project\data\news cluster'
-file_name = 'news_cluster0'
+# file_name = 分群之後的csv檔案的名稱   news_cluster0 , news_cluster1, ... news_cluster9 etc.
+file_name = 'news_cluster0'	#選取你要標示的file name
+direction = r'C:\Users\User\Documents\GitHub\Big_data_analytics\mid project\data\news cluster'	#分群好的CSV檔所在"資料夾"地址
 file_in = direction + '\\' +  file_name +'.csv'
 
 #存檔的目標"資料夾"地址:	e.g r'‪C:\Users\User\Desktop'
