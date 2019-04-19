@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
-dataset_array = pd.read_csv(r'C:\Users\User\forum_1000_tf_idf.csv').iloc[:,1:].values
+dataset_array = pd.read_csv(r'C:\Users\User\BBS_1000_tf_idf.csv').iloc[:,1:].values
 
 print(dataset_array.shape)
 

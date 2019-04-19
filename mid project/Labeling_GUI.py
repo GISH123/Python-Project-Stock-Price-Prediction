@@ -14,8 +14,8 @@
 '''
 
 # file_name = 分群之後的csv檔案的名稱   news_cluster0 , news_cluster1, ... news_cluster9 etc.
-file_name = 'news_cluster0'	#選取你要標示的file name
-direction = r'C:\Users\User\Documents\GitHub\Big_data_analytics\mid project\data\news cluster'	#分群好的CSV檔所在"資料夾"地址
+file_name = 'bbs_cluster0'	#選取你要標示的file name
+direction = r'C:\Users\User\Documents\GitHub\Big_data_analytics\mid project\data\BBS cluster'	#分群好的CSV檔所在"資料夾"地址
 file_in = direction + '\\' +  file_name +'.csv'
 
 #存檔的目標"資料夾"地址:	e.g r'‪C:\Users\User\Desktop'
@@ -29,13 +29,14 @@ import pandas as pd
 import re, csv
 import time
 
-df = pd.read_csv(file_in, encoding = 'big5')
+df = pd.read_csv(file_in)	#news 用big5, forum 用utf-8, bbs不用encoding
 start = 0
 end = 1
 count = -1
 Frame_dict = {}
 label_dict = {}
-
+from sklearn.utils import shuffle
+df = shuffle(df, random_state = 30).sample(frac=1)
 
 class TwoPageApp(tk.Tk):
 
