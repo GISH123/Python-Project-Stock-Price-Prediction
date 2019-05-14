@@ -16,7 +16,7 @@
 
 ### 台股指數漲跌
 * 預測下跌準確率:77.78%, 預測上漲準確率:70.59%, 出手率:三成
-* [程式碼](https://github.com/ga877439/Big_data_analytics/blob/master/mid%20project/ipy/%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%B5%B1%E6%95)
+* [程式碼](https://github.com/ga877439/Big_data_analytics/blob/master/mid%20project/ipy/%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%B5%B1%E6%95%B4.ipynb)
 
 ### 事件預測(台灣50成分股)
 * 出手率非常低，但預測下跌準確率:63.16%
